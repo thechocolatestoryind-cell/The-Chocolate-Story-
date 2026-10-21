@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Saved Addresses — The Chocolate Story</title>
+<meta name="description" content="Manage your saved delivery addresses.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#542E1D">
+<meta property="og:site_name" content="The Chocolate Story">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Saved Addresses — The Chocolate Story">
+<meta property="og:description" content="Manage your saved delivery addresses.">
+<link rel="preload" as="image" href="logo-header.webp" type="image/webp">
+<link rel="modulepreload" href="common.js"><link rel="modulepreload" href="firebase.js"><link rel="modulepreload" href="auth.js">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="account.css">
+<link rel="stylesheet" href="responsive.css">
+</head>
+<body data-page="addresses">
+<div id="site-header"></div>
+<main id="main">
+  <header class="page-head"><div class="container"><p class="crumbs"><a href="index.html">Home</a> / Saved addresses</p><h1>Saved addresses</h1><p>Keep your delivery addresses handy.</p></div></header>
+  <section class="section"><div class="container"><div id="addresses-contents" aria-live="polite"></div></div></section>
+</main>
+<div id="site-footer"></div>
+<noscript><p style="padding:1rem;text-align:center">The Chocolate Story needs JavaScript to load products and your account. Please enable it, or reach us on WhatsApp +91 88470 50895.</p></noscript>
+<script type="module" src="common.js"></script>
+<script type="module" src="addresses.js"></script>
+</body>
+</html>

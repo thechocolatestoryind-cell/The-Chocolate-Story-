@@ -1,0 +1,35 @@
+/* account.css — login, profile and address UI. */
+.auth-wrap{display:grid;place-items:center;padding:clamp(2rem,6vw,4rem) 0}
+.auth-card{width:min(100%,440px);background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-l);padding:clamp(1.5rem,5vw,2.5rem);box-shadow:var(--shadow);text-align:center}
+.auth-card img{height:64px;width:auto;margin:0 auto 1rem}
+.auth-card__title{margin-bottom:.5rem}
+.auth-card p{margin-inline:auto;color:var(--text-soft)}
+.profile-grid{display:grid;gap:1.5rem}
+
+/* account profile, addresses */
+.addr{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem 1.25rem 1.1rem}
+
+.addr-list{display:grid;gap:1rem;margin-bottom:1.25rem}
+.addr{display:grid;gap:.6rem;align-content:start;position:relative}
+
+.addr address{display:grid;gap:.1rem;font-style:normal;overflow-wrap:anywhere}
+
+.addr-form{display:grid;gap:0}
+
+@media (min-width:600px){.addr-form{grid-template-columns:1fr 1fr;column-gap:1rem}.addr-form>.field:nth-child(3),.addr-form>.field:nth-child(4),.addr-form>.field:nth-child(5),.addr-form>.check,.addr-form>.form-actions,.addr-form>.form-status{grid-column:1/-1}}
+
+/* ---- Stage 4: account & addresses ---- */
+.profile-head{display:flex;flex-wrap:wrap;align-items:center;gap:1rem}
+.profile-head h2{margin:0}.profile-head .btn{margin-left:auto}
+.avatar{width:72px;height:72px;border-radius:50%;object-fit:cover;background:var(--blush);flex:none}
+.avatar--blank{display:grid;place-items:center;font:600 2rem var(--font-display);color:var(--choc-700);background:var(--cream)}
+.tiles{display:grid;gap:.9rem;grid-template-columns:1fr}
+.tile{display:grid;gap:.2rem;padding:1.1rem 1.2rem;border-radius:var(--radius);background:var(--blush);border:1px solid var(--line);border-left:5px solid var(--caramel);text-decoration:none;color:var(--text)}
+.tile strong{font:600 var(--fs-1) var(--font-display);color:var(--choc-700)}.tile span{color:var(--text-soft);font-size:.92rem}
+.tile:hover{background:#efd9c6}
+.addr-list{display:grid;gap:1rem;grid-template-columns:1fr}
+.addr-card{display:grid;gap:.7rem;align-content:start;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:1.1rem 1.2rem}
+.addr-card.is-default{border-color:var(--caramel);box-shadow:0 0 0 1px var(--caramel)}
+.addr-card--edit{grid-column:1/-1}
+.addr-actions{display:flex;flex-wrap:wrap;gap:.25rem 1rem}
+.addr-form{display:grid;gap:1rem}

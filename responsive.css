@@ -1,0 +1,73 @@
+/* responsive.css — breakpoints, then accessibility preferences. Loaded last on every page. */
+@media (min-width:600px){
+.trust{grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:900px){
+.menu-toggle{display:none}
+.site-nav{display:flex}
+.brand img{height:52px}
+.site-footer__grid{grid-template-columns:1.4fr 1fr 1fr 1.3fr}
+.trust{grid-template-columns:repeat(4,1fr)}
+.profile-grid{grid-template-columns:1fr 1fr}
+.toast-host{inset:auto 1.5rem 1.5rem auto;justify-items:end}
+}
+@media (max-width:899px){.drawer{display:block}.drawer[hidden]{display:none}}
+@media (min-width:900px){.drawer{display:none!important}}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+.spinner{animation:none;border-top-color:var(--line);border-right-color:var(--choc-700)}
+}
+@media (forced-colors:active){.btn,.icon-btn{border:1px solid ButtonText}}
+
+/* ---- homepage (Stage 2) ---- */
+@media (min-width:600px){
+.cat-grid{grid-template-columns:repeat(3,1fr)}
+.skeleton-row{grid-template-columns:repeat(3,1fr)}
+.occasions{grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:900px){
+.cat-grid{grid-template-columns:repeat(4,1fr)}
+.skeleton-row{grid-template-columns:repeat(4,1fr)}
+.occasions{grid-template-columns:repeat(4,1fr)}
+.p-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.story__grid{grid-template-columns:1.1fr 1fr}
+.reassure__grid{grid-template-columns:.8fr 1.4fr;align-items:start}
+.rev-row{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible}
+.rev{flex:none}
+.hl{width:112px}.hl__ring{width:104px;height:104px}.hl__label{max-width:112px}
+.viewer__panel{border-radius:var(--radius-l);height:min(92dvh,860px)}
+}
+@media (max-width:700px){.hero__viewport{height:min(78vh,560px)}.hero__title{font-size:clamp(2.2rem,10vw,3rem)}}
+@media (prefers-reduced-motion:reduce){
+.fab,.skeleton{animation:none}
+.hero__slide{transition:none}
+.cat__img,.cat__fallback{transition:none}
+}
+
+/* ---- shop / product / cart / wishlist (Stage 3) ---- */
+@media (min-width:600px){.p-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:900px){
+.p-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.product-layout{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:start;gap:3rem}
+.buy__desc{grid-column:1/-1}
+.cart-layout{grid-template-columns:minmax(0,1.7fr) minmax(300px,1fr)}
+.summary-card{position:sticky;top:calc(var(--header-h) + 1rem)}
+.shop-toolbar{flex-wrap:nowrap}
+}
+@media (max-width:599px){
+.line{grid-template-columns:76px 1fr;}
+.line__total{grid-column:2;justify-self:end}
+.line__img img{width:76px;height:76px}
+}
+@media (prefers-reduced-motion:reduce){.wish,.chip{transition:none}}
+
+/* ---- account / checkout / orders (Stage 4) ---- */
+@media (min-width:900px){
+.addr-list{grid-template-columns:1fr 1fr}
+}
+
+/* ---- Stage 4 ---- */
+@media (min-width:600px){.form-grid{grid-template-columns:1fr 1fr}.field--wide{grid-column:1/-1}.tiles{grid-template-columns:repeat(3,1fr)}.addr-list{grid-template-columns:1fr 1fr}}
+@media (min-width:900px){.rev-list{grid-template-columns:1fr 1fr}.profile-grid{grid-template-columns:1fr}.cart-layout{align-items:start}}
+@media (max-width:480px){.steps{font-size:.7rem}.kv{grid-template-columns:1fr}.oi{flex-direction:column;gap:.2rem}}
