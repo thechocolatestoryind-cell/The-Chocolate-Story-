@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Chocolate Story — Premium Eggless Chocolates, Cakes & Gifts</title>
+<meta name="description" content="Premium 100% eggless chocolates, cakes, desserts, gifts and hampers from The Chocolate Story, with PAN India delivery.">
+<meta name="theme-color" content="#542E1D">
+<meta property="og:site_name" content="The Chocolate Story">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Chocolate Story — Premium Eggless Chocolates, Cakes & Gifts">
+<meta property="og:description" content="Premium 100% eggless chocolates, cakes, desserts, gifts and hampers from The Chocolate Story, with PAN India delivery.">
+<link rel="preload" as="image" href="logo-header.webp" type="image/webp">
+<link rel="modulepreload" href="common.js"><link rel="modulepreload" href="firebase.js"><link rel="modulepreload" href="auth.js">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="home.css">
+<link rel="stylesheet" href="responsive.css">
+</head>
+<body data-page="home">
+<div id="site-header"></div>
+<main id="main">
+  <div id="hero-slot">
+    <section class="home-intro" aria-labelledby="intro-title">
+      <div class="container home-intro__inner">
+        <h1 id="intro-title">Every moment tastes better with chocolate.</h1>
+        <p>Premium chocolates, cakes, desserts, gifts and hampers &mdash; 100% eggless, delivered across India.</p>
+        <div class="home-intro__actions"><a class="btn btn--caramel" href="shop.html">Shop now</a><a class="btn btn--ghost" href="reviews.html">Read reviews</a></div>
+      </div>
+    </section>
+  </div>
+  <ul class="trust" aria-label="Why customers choose us">
+    <li><strong>100% eggless</strong><span>Every product we make</span></li>
+    <li><strong>PAN India delivery</strong><span>Gifts that travel well</span></li>
+    <li><strong>Around 6&ndash;8 days</strong><span>Estimated delivery, not a guarantee</span></li>
+    <li><strong>Online payment</strong><span>No Cash on Delivery</span></li>
+  </ul>
+
+  <section class="section home-sec" id="sec-highlights" aria-labelledby="h-highlights" aria-busy="true">
+    <div class="container"><h2 class="visually-hidden" id="h-highlights">Highlights</h2><div id="highlights-slot"></div></div>
+  </section>
+
+  <section class="section home-sec" id="sec-categories" aria-labelledby="h-categories" aria-busy="true">
+    <div class="container">
+      <div class="sec-head"><h2 id="h-categories">Shop by category</h2><a class="sec-head__link" href="shop.html">View all</a></div>
+      <div id="categories-slot"></div>
+    </div>
+  </section>
+
+  <section class="section home-sec" id="sec-featured" aria-labelledby="h-featured" aria-busy="true">
+    <div class="container">
+      <div class="sec-head"><h2 id="h-featured">Featured favourites</h2><a class="sec-head__link" href="shop.html">Shop all</a></div>
+      <div id="featured-slot"></div>
+    </div>
+  </section>
+
+  <section class="section home-sec" id="sec-new" aria-labelledby="h-new" aria-busy="true">
+    <div class="container">
+      <div class="sec-head"><h2 id="h-new">New arrivals</h2><a class="sec-head__link" href="shop.html">Shop all</a></div>
+      <div id="new-slot"></div>
+    </div>
+  </section>
+
+  <section class="section home-sec" id="sec-occasions" aria-labelledby="h-occasions">
+    <div class="container">
+      <div class="sec-head"><h2 id="h-occasions">Gifting for every occasion</h2></div>
+      <p class="sec-lead">Tell us the occasion and we&rsquo;ll help you choose &mdash; or design something made just for it.</p>
+      <ul class="occasions" id="occasions-slot"></ul>
+    </div>
+  </section>
+
+  <section class="story" id="sec-story" aria-labelledby="h-story">
+    <div class="container story__grid">
+      <div>
+        <h2 id="h-story">Made with chocolate, wrapped with care.</h2>
+        <p>The Chocolate Story began with a simple belief: a gift should feel as special as the person receiving it. Every chocolate, cake and hamper is made to be shared, remembered and enjoyed by everyone at the table.</p>
+      </div>
+      <ul class="story__points">
+        <li><strong>100% eggless</strong><span>Every product, so more people can enjoy it.</span></li>
+        <li><strong>PAN India delivery</strong><span>Send a little sweetness to anyone, anywhere in India.</span></li>
+        <li><strong>Gifts made for moments</strong><span>Chocolates, cakes, desserts and hampers for celebrations big and small.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section home-sec" id="sec-reviews" aria-labelledby="h-reviews" aria-busy="true">
+    <div class="container">
+      <div class="sec-head"><h2 id="h-reviews">Kind words from customers</h2><a class="sec-head__link" href="reviews.html">All reviews</a></div>
+      <div id="reviews-slot"></div>
+    </div>
+  </section>
+
+  <section class="section reassure" id="sec-delivery" aria-labelledby="h-delivery">
+    <div class="container reassure__grid">
+      <h2 id="h-delivery">Ordering, made easy</h2>
+      <ul>
+        <li><strong>Delivery in around 6&ndash;8 days.</strong> This is an estimate from your order date; actual timing can vary, and your order page shows the latest status.</li>
+        <li><strong>Secure online payment.</strong> We don&rsquo;t offer Cash on Delivery.</li>
+        <li><strong>Something not right?</strong> If an item arrives damaged or incorrect, message us on WhatsApp with photos and we&rsquo;ll look into it.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<noscript><p style="padding:1rem;text-align:center">The Chocolate Story needs JavaScript to load products and your account. Please enable it, or reach us on WhatsApp +91 88470 50895.</p></noscript>
+<script type="module" src="common.js"></script>
+<script type="module" src="home.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+/* legal.css — information & policy pages (About, Privacy, Terms, Shipping, Cancellation, Return & Refund, Contact). */
+.legal{display:grid;gap:1.75rem;padding-block:clamp(1.75rem,4vw,3.25rem)}
+.legal-meta{margin:.9rem 0 0;color:var(--text-soft);font-size:.92rem}
+.legal-toc{min-width:0}
+.legal-toc h2{margin:0 0 .6rem;font:600 1.1rem var(--font-display);color:var(--choc-700)}
+.legal-toc ol{display:flex;flex-wrap:wrap;gap:.4rem;margin:0;padding:0;list-style:none}
+.legal-toc a{display:inline-flex;align-items:center;min-height:40px;padding:.3rem .85rem;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--choc-700);font-size:.9rem;text-decoration:none}
+.legal-toc a:hover{border-color:var(--warm);background:var(--blush)}
+.legal-body{min-width:0;max-width:74ch}
+.legal-body h2{scroll-margin-top:calc(var(--header-h) + 1rem);margin:2.4rem 0 .7rem;padding-top:1.5rem;border-top:1px solid var(--line);font-size:var(--fs-2)}
+.legal-body>h2:first-child{margin-top:0;padding-top:0;border-top:0}
+.legal-body h3{margin:1.5rem 0 .4rem;font-size:var(--fs-1)}
+.legal-body p,.legal-body li{max-width:none}
+.legal-body ul,.legal-body ol{margin:0 0 1em;padding-left:1.3rem}
+.legal-body ul{list-style:disc}
+.legal-body li{margin-bottom:.4rem;overflow-wrap:anywhere}
+.legal-body li::marker{color:var(--warm)}
+.legal-note{margin:1.3rem 0;padding:1rem 1.2rem;border-left:4px solid var(--caramel);border-radius:0 var(--radius-s) var(--radius-s) 0;background:var(--blush)}
+.legal-note p:last-child{margin-bottom:0}
+.legal-note strong{color:var(--choc-700)}
+.legal-body a{overflow-wrap:anywhere}
+.contact-grid{display:grid;gap:1rem;margin:0 0 1.5rem;padding:0;list-style:none}
+.contact-card{display:grid;gap:.35rem;height:100%;padding:1.2rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper)}
+.contact-card h3{margin:0;font-size:var(--fs-1)}
+.contact-card p{margin:0;color:var(--text-soft)}
+.contact-card a{font-weight:500;overflow-wrap:anywhere}
+.contact-wide{max-width:none}
+@media (min-width:700px){.contact-grid{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:900px){
+  .legal.has-toc{grid-template-columns:240px minmax(0,1fr);gap:3.5rem;align-items:start}
+  .legal-toc{position:sticky;top:calc(var(--header-h) + 1.25rem)}
+  .legal-toc ol{display:grid;gap:0}
+  .legal-toc a{min-height:40px;padding:.35rem .8rem;border:0;border-left:2px solid var(--line);border-radius:0;background:none;font-size:.92rem}
+  .legal-toc a:hover{border-left-color:var(--caramel);background:var(--blush)}
+}
+.legal-body .contact-grid{padding:0;list-style:none}
+.legal-body .contact-grid>li{margin:0}
+.contact-card a{text-underline-offset:4px}
