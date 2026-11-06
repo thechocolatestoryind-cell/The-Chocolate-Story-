@@ -1,0 +1,11 @@
+{
+  "name": "the-chocolate-story-functions",
+  "private": true,
+  "description": "Trusted backend for The Chocolate Story storefront: creates pending orders and handles customer cancellation.",
+  "main": "index.js",
+  "engines": { "node": "20" },
+  "dependencies": {
+    "firebase-admin": "^12.7.0",
+    "firebase-functions": "^5.1.1"
+  }
+}
