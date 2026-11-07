@@ -174,7 +174,7 @@ export function setMeta(title, description) {
 
 /* ---------- manual UPI payment (fixed business values) ---------- */
 // Opening a UPI app never proves payment. The admin verifies the real bank/UPI credit manually before approving an order.
-export const UPI_CONFIG = Object.freeze({ vpa: "mallikabdurrahman37@oksbi", payeeName: "The Chocolate Story", currency: "INR" });
+export const UPI_CONFIG = Object.freeze({ vpa: "kirti07kkapoor@okhdfcbank", payeeName: "The Chocolate Story", currency: "INR" });
 /** Builds a standard UPI intent URI with safely encoded parameters. */
 export function buildUpiUri(amount, orderRef) {
   const am = (Math.round(Number(amount) * 100) / 100).toFixed(2);
