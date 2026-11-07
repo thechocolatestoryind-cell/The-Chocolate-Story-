@@ -1,0 +1,8 @@
+# The Chocolate Story — public pages, CSS, JS and images are all crawlable.
+# Private pages (cart, checkout, login, account, orders, wishlist, addresses) are kept out of search with a
+# "noindex" robots meta tag on each page. They are deliberately NOT disallowed here: a disallowed page can't be
+# fetched, so Google would never see its noindex tag.
+User-agent: *
+Allow: /
+
+Sitemap: https://thechocolatestory.in/sitemap.xml
