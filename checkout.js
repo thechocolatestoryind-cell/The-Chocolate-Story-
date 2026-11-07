@@ -1,4 +1,4 @@
-// checkout.js — review → delivery address → Pay with any UPI App → Confirm Purchase → order saved → WhatsApp payment-proof handoff.
+// checkout.js — review → delivery address → Confirm Purchase → payment QR popup → "I have paid" confirmation → order saved → WhatsApp payment-proof handoff.
 // PAYMENT MODEL (manual, no gateway, no backend): opening a UPI app proves nothing. Confirm Purchase only SUBMITS the order as
 // "pending_payment_verification"; the administrator verifies the real bank/UPI credit and approves it. Prices come from the existing
 // storefront calculation (client-side), so the admin must compare the received amount with the order before approving.
@@ -40,7 +40,7 @@ async function init() {
   if (ctx.inactive) return renderInactive(slot);
   const { user, profile } = ctx;
   const settings = await getPublicSettings();
-  let views = [], addresses = [], selected = "", adding = false, placing = false, totals = null, noteText = "", agreed = false, attempt = null, upiTried = false;
+  let views = [], addresses = [], selected = "", adding = false, placing = false, totals = null, noteText = "", agreed = false, attempt = null;
   const live = el("p", { class: "visually-hidden", role: "status", "aria-live": "polite" });
 
   async function load() {
@@ -73,25 +73,15 @@ async function init() {
     totals = calculateTotals(usable.map(v => ({ productId: v.line.productId, name: v.line.name, unitPrice: v.unit, quantity: v.qty, deliveryCharge: v.delivery })));
     const addr = addresses.find(a => a.id === selected);
     const ready = !blocked() && !unverified() && usable.length && addr && agreeBox.checked && !placing;
-    const upiUri = attempt ? buildUpiUri(totals.total, attempt.number) : "";
-    const upiBtn = el("a", { class: "btn btn--caramel btn--block", id: "upi-btn", href: upiUri, role: "button" }, "Pay with any UPI App");
-    upiBtn.addEventListener("click", () => { upiTried = true; showToast("After paying, come back here and tap Confirm Purchase.", { timeout: 6000 }); });
-    const copyBtn = el("button", { type: "button", class: "link-btn" }, "Copy UPI ID");
-    copyBtn.addEventListener("click", async () => { try { await navigator.clipboard.writeText(UPI_CONFIG.vpa); showToast("UPI ID copied.", { type: "success", timeout: 2000 }); } catch { showToast("Couldn't copy — please select the UPI ID manually.", { type: "error" }); } });
     const confirmBtn = el("button", { type: "button", class: "btn btn--primary btn--block", id: "confirm-btn", disabled: !ready }, placing ? "Submitting your order…" : "Confirm Purchase");
-    confirmBtn.addEventListener("click", () => confirmPurchase(addr, noteBox.value, usable));
+    confirmBtn.addEventListener("click", () => openPayment(addr, noteBox.value, usable));
     return el("aside", { class: "summary-card", "aria-label": "Order summary" }, el("h2", { text: "Order summary" }),
       el("ul", { class: "mini-lines" }, usable.map(v => el("li", { class: "summary-row summary-row--small" }, el("span", { text: `${v.line.name} × ${v.qty}` + (v.line.selections.length ? ` (${v.line.selections.map(s => s.text || s.label).join(", ")})` : "") }), el("span", { text: formatINR(v.unit * v.qty) })))),
       el("div", { class: "summary-row" }, el("span", { text: "Items" }), el("span", { text: formatINR(totals.subtotal) })),
       el("div", { class: "summary-row" }, el("span", { text: "Delivery" }), el("span", { text: formatINR(totals.deliveryTotal) })),
       el("div", { class: "summary-row summary-row--total" }, el("span", { text: "Total payable" }), el("span", { text: formatINR(totals.total) })),
       unverified() ? el("p", { class: "line__note line__note--bad", role: "alert", text: "We couldn't refresh some prices. Please check your connection and reload this page before paying." }) : null,
-      el("div", { class: "upi-box" }, el("h3", { text: "Payment" }),
-        el("p", { class: "summary-note", text: `Step 1: pay ${formatINR(totals.total)} using any UPI app. We'll add your order reference ${attempt ? attempt.number : ""} as the payment note.` }),
-        upiBtn,
-        el("p", { class: "summary-note" }, "If no UPI app opens (for example on a computer), pay manually to UPI ID ", el("strong", { text: UPI_CONFIG.vpa }), " (" + UPI_CONFIG.payeeName + ") with note ", el("strong", { text: attempt ? attempt.number : "" }), ". ", copyBtn),
-        el("p", { class: "summary-note", text: "Opening a UPI app does not complete or confirm your order." }),
-        el("p", { class: "summary-note", text: "Step 2: after paying, return here and tap Confirm Purchase. This submits your order and asks us to verify your payment — it is not payment confirmation." })),
+      el("p", { class: "summary-note", text: `Next, you'll see our payment QR code to pay ${formatINR(totals.total)}. Your order is submitted only after you confirm your payment there.` }),
       confirmBtn,
       el("p", { class: "summary-note", text: "Your order is confirmed only after we verify the payment in our bank/UPI records. UPI payment only — no Cash on Delivery. Delivery is usually around 6–8 days from the order date (an estimate, not a guarantee)." }),
       el("a", { class: "btn btn--ghost btn--block", href: "cart.html", text: "Back to cart" }));
@@ -117,6 +107,60 @@ async function init() {
       el("label", { class: "check", for: "agree" }, agree, el("span", { text: "I've checked that my delivery address and phone number are correct." })));
     const blockedMsg = blocked() ? el("p", { class: "line__note line__note--bad", role: "alert" }, "Some items in your cart are no longer available. ", el("a", { href: "cart.html", text: "Review your cart" }), document.createTextNode(" to continue.")) : null;
     slot.replaceChildren(el("div", { class: "cart-layout" }, el("div", { class: "checkout-main" }, blockedMsg, addrBlock, confirmBlock), sum), live);
+  }
+
+
+  /* ---------- payment popups: (1) pay by QR → (2) "I have paid" confirmation → order is saved → WhatsApp popup ---------- */
+  const layers = [];
+  function layer(card, label) {
+    const wrap = el("div", { class: "pay-modal", role: "dialog", "aria-modal": "true", "aria-label": label }, el("div", { class: "pay-modal__card" }, card));
+    const prevFocus = document.activeElement;
+    const close = () => { const i = layers.indexOf(api); if (i < 0) return; layers.splice(i, 1); wrap.remove(); if (!layers.length) document.body.style.overflow = ""; if (prevFocus && prevFocus.focus) prevFocus.focus(); };
+    const api = { close };
+    layers.push(api); document.body.style.overflow = "hidden"; document.body.append(wrap);
+    const first = wrap.querySelector("button, a"); if (first) first.focus();
+    return api;
+  }
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && layers.length) layers[layers.length - 1].close(); });
+  const closeAllLayers = () => { while (layers.length) layers[layers.length - 1].close(); };
+
+  function openPayment(addr, customerNote, usable) {
+    if (placing || !attempt) return;
+    const amt = formatINR(totals.total), ref = attempt.number;
+    const payLink = el("a", { class: "btn btn--caramel btn--block", href: buildUpiUri(totals.total, ref), role: "button" }, "Pay with any UPI App");
+    const confirmPaid = el("button", { type: "button", class: "btn btn--primary btn--block" }, "I have paid — Confirm payment");
+    const top = layer([
+      el("h2", { text: "Complete your payment" }),
+      el("div", { class: "pay-amount" }, el("span", { text: "Amount to pay" }), el("strong", { text: amt })),
+      el("p", { class: "summary-note", text: `Order reference: ${ref}` }),
+      el("figure", { class: "pay-qr" },
+        el("img", { src: "upi-qr.png", alt: "The Chocolate Story UPI QR code", width: 288, height: 432 }),
+        el("a", { class: "btn btn--ghost pay-small", href: "upi-qr.png", download: "The-Chocolate-Story-UPI-QR.png" }, "Download QR"),
+        el("figcaption", { class: "summary-note", text: "If the image opens instead of downloading, press and hold it to save." })),
+      el("p", { class: "pay-note" }, el("strong", { text: "Recommended: " }), `please take a screenshot or download this QR code, open any UPI app, scan it from your gallery (or scan it from another device's screen) and pay exactly ${amt}. The amount is not pre-filled in the QR, so please enter it yourself` + (ref ? ` and add ${ref} as the note if your app allows.` : ".")),
+      totals.total > 2000 ? el("p", { class: "pay-note", text: "Some UPI apps limit payments made with a QR picked from the gallery (for example to ₹2,000). If your app refuses, scan this QR from another device's screen using the camera." }) : null,
+      el("div", { class: "pay-alt" }, payLink,
+        el("p", { class: "pay-note", text: "Because of technical limits in some UPI apps and banks, this button may not work on every device. We recommend using the QR code above." })),
+      el("p", { class: "pay-note" }, el("strong", { text: "After paying: " }), "keep your payment screenshot. You will need to send it to our WhatsApp so we can verify your payment. Opening a UPI app does not confirm your order."),
+      confirmPaid,
+      el("button", { type: "button", class: "link-btn", onclick: () => top.close() }, "Cancel")
+    ], "Complete your payment");
+    confirmPaid.addEventListener("click", () => openConfirm(addr, customerNote, usable, amt));
+  }
+
+  function openConfirm(addr, customerNote, usable, amt) {
+    const tick = el("input", { type: "checkbox", id: "paid-tick" });
+    const submit = el("button", { type: "button", class: "btn btn--primary btn--block", disabled: true }, "Yes, submit my order");
+    tick.addEventListener("change", () => { submit.disabled = !tick.checked; });
+    const top = layer([
+      el("h2", { text: "Confirm your payment" }),
+      el("p", { text: `Please continue only if you have already paid ${amt}. Keep your payment screenshot with you: in the next step you will send it on WhatsApp together with your order message, so that we can verify your payment and confirm your order.` }),
+      el("p", { class: "pay-note", text: "Your order is confirmed only after we verify the payment in our bank/UPI records." }),
+      el("label", { class: "check", for: "paid-tick" }, tick, el("span", { text: `I have already made the payment of ${amt} and I will send the payment screenshot on WhatsApp.` })),
+      submit,
+      el("button", { type: "button", class: "link-btn", onclick: () => top.close() }, "Go back")
+    ], "Confirm your payment");
+    submit.addEventListener("click", () => { if (!tick.checked || placing) return; submit.disabled = true; closeAllLayers(); confirmPurchase(addr, customerNote, usable); });
   }
 
   /** Saves the order. The cart is cleared ONLY after Firestore accepted the write. */
