@@ -1,0 +1,104 @@
+/* diwali.css — Diwali night theme for the homepage. Brand palette only (style.css tokens). To switch the theme off: delete diwali.css, diwali.js,
+   their <link>/<script> tags and the inline "dw-hold" script in index.html, and the <section class="fest"> block. Nothing else depends on them. */
+
+/* entry hold: dark cover until the splash is ready (removed by diwali.js, with a 3.6 s safety timer in index.html) */
+html.dw-hold::before{content:"";position:fixed;inset:0;z-index:299;background:var(--choc-900)}
+html.dw-hold .fest__inner>*{opacity:0;animation-play-state:paused}
+
+/* ---------- entry splash: a diya is lit ---------- */
+.dw-intro{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:1rem;background:radial-gradient(circle at 50% 56%,#4A2818 0%,var(--choc-900) 52%,#1B0E08 100%);transition:opacity .85s var(--ease),transform .85s var(--ease),visibility .85s;cursor:pointer}
+.dw-intro.is-out{opacity:0;transform:scale(1.06);visibility:hidden}
+.dw-intro__box{position:relative;display:grid;justify-items:center;gap:1.2rem;text-align:center}
+.dw-intro__glow{position:absolute;left:50%;top:38%;width:min(120vw,720px);aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:radial-gradient(circle,rgba(225,183,151,.55),rgba(201,145,109,.18) 38%,transparent 66%);animation:dw-bloom 1.6s .6s var(--ease) both}
+.dw-intro__diya{position:relative;width:clamp(120px,30vw,200px);height:auto;overflow:visible}
+.dw-intro__flame{transform-box:fill-box;transform-origin:50% 100%;animation:dw-ignite 1s .5s var(--ease) both,dw-flick 1.1s 1.5s ease-in-out infinite alternate}
+.dw-intro__title{position:relative;margin:0;font:600 clamp(2rem,1.2rem + 5vw,3.6rem)/1.05 var(--font-display);color:var(--ivory);letter-spacing:.02em;animation:dw-rise 1s 1.25s var(--ease) both}
+.dw-intro__sub{position:relative;margin:0;color:var(--cream);letter-spacing:.28em;text-transform:uppercase;font-size:.78rem;animation:dw-rise 1s 1.5s var(--ease) both}
+.dw-intro__skip{position:absolute;bottom:max(1.5rem,env(safe-area-inset-bottom));left:50%;translate:-50% 0;min-height:44px;padding:.5rem 1.4rem;border:1px solid rgba(225,183,151,.55);border-radius:999px;background:transparent;color:var(--cream);font:500 .9rem var(--font-body);letter-spacing:.06em;cursor:pointer;animation:dw-fade .8s 1s both}
+.dw-intro__skip:hover{background:var(--cream);color:var(--choc-900)}
+.dw-intro :focus-visible{outline-color:var(--cream);box-shadow:0 0 0 6px var(--choc-900)}
+@keyframes dw-bloom{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
+@keyframes dw-ignite{from{opacity:0;transform:scale(.1)}to{opacity:1;transform:scale(1)}}
+@keyframes dw-flick{from{transform:scale(1,1) rotate(-1.5deg)}to{transform:scale(.94,1.1) rotate(1.5deg)}}
+@keyframes dw-rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes dw-fade{from{opacity:0}to{opacity:1}}
+
+/* ---------- festive hero ---------- */
+.fest{position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;text-align:center;color:var(--ivory);
+  min-height:clamp(560px,calc(100vh - var(--header-h)),880px);min-height:clamp(560px,calc(100svh - var(--header-h)),880px);
+  background:radial-gradient(ellipse 75% 55% at 50% 108%,rgba(201,145,109,.42),transparent 70%),radial-gradient(ellipse 60% 45% at 50% -8%,rgba(157,111,81,.32),transparent 72%),var(--choc-900)}
+.fest__layer{position:absolute;inset:0;pointer-events:none;translate:var(--px,0) var(--py,0);transition:translate .35s var(--ease)}
+.fest__layer--rangoli{display:grid;place-items:center;z-index:1}
+.fest__rangoli{width:min(150vw,1000px);height:auto;opacity:.34;animation:dw-spin 140s linear infinite}
+@keyframes dw-spin{to{transform:rotate(360deg)}}
+.fest__bokeh{z-index:1;list-style:none;margin:0;padding:0}
+.fest__bokeh li{position:absolute;left:var(--x);bottom:-12%;width:var(--s);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(251,246,240,.9),rgba(225,183,151,.55) 35%,transparent 70%);opacity:0;animation:dw-float var(--t) linear var(--d) infinite}
+@keyframes dw-float{0%{transform:translateY(0) scale(.7);opacity:0}12%{opacity:var(--o)}80%{opacity:calc(var(--o)*.6)}100%{transform:translateY(-120vh) scale(1.15);opacity:0}}
+.fest__fx{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+
+/* toran: hanging garland along the top edge */
+.fest__toran{position:absolute;left:0;right:0;top:0;height:72px;z-index:4;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='72' viewBox='0 0 96 72'%3E%3Cpath d='M0 4Q48 32 96 4' fill='none' stroke='%239D6F51' stroke-width='1.6'/%3E%3Cpath d='M16 14q-6 12 0 24q6-12 0-24zM48 21q-6 12 0 24q6-12 0-24zM80 14q-6 12 0 24q6-12 0-24z' fill='%239D6F51'/%3E%3Ccircle cx='16' cy='44' r='6' fill='%23C9916D'/%3E%3Ccircle cx='48' cy='51' r='6.5' fill='%23E1B797'/%3E%3Ccircle cx='80' cy='44' r='6' fill='%23C9916D'/%3E%3Ccircle cx='16' cy='44' r='2.2' fill='%232D1910' fill-opacity='.45'/%3E%3Ccircle cx='48' cy='51' r='2.4' fill='%232D1910' fill-opacity='.4'/%3E%3Ccircle cx='80' cy='44' r='2.2' fill='%232D1910' fill-opacity='.45'/%3E%3C/svg%3E") 0 0/96px 72px repeat-x}
+
+/* hanging lanterns */
+.fest__lanterns{z-index:3}
+.lan{position:absolute;top:-2px;left:var(--l);width:var(--w);aspect-ratio:2/5;translate:-50% 0;transform-origin:50% 0;animation:dw-sway 5.2s ease-in-out var(--sd) infinite alternate}
+.lan svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 16px rgba(225,183,151,.55))}
+.lan::after{content:"";position:absolute;left:50%;top:41%;width:230%;aspect-ratio:1;translate:-50% -30%;border-radius:50%;background:radial-gradient(circle,rgba(225,183,151,.4),transparent 62%);animation:dw-glow 2.6s ease-in-out var(--sd) infinite alternate;pointer-events:none;z-index:-1}
+@keyframes dw-sway{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+@keyframes dw-glow{from{opacity:.55}to{opacity:1}}
+
+/* content */
+.fest__inner{position:relative;z-index:5;display:grid;justify-items:center;gap:clamp(.9rem,2vw,1.5rem);padding:clamp(4.5rem,11vw,7.5rem) 0 clamp(5rem,10vw,7rem)}
+.fest__inner>*{animation:dw-rise .95s var(--ease) both;animation-delay:calc(var(--i,0)*.14s + .1s)}
+.fest__eyebrow{display:flex;align-items:center;gap:.9rem;margin:0;color:var(--cream);font-size:clamp(.74rem,.7rem + .2vw,.88rem);letter-spacing:.34em;text-transform:uppercase}
+.fest__eyebrow span{width:clamp(28px,6vw,64px);height:1px;background:linear-gradient(90deg,transparent,var(--caramel))}
+.fest__eyebrow span:last-child{transform:scaleX(-1)}
+.fest__title{margin:0;color:var(--ivory);font-size:clamp(3.2rem,1.2rem + 10.5vw,9rem);line-height:.92;letter-spacing:.01em;text-wrap:balance;text-shadow:0 6px 40px rgba(45,25,16,.55)}
+.fest__title em{display:block;font-style:italic;font-weight:600;color:var(--cream);background:linear-gradient(100deg,var(--cream) 20%,#FBF6F0 45%,var(--caramel) 60%,var(--cream) 80%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:dw-shine 6s linear infinite}
+@keyframes dw-shine{to{background-position:-220% 0}}
+.fest__lead{margin:0;max-width:46ch;color:var(--cream);font-size:clamp(1.05rem,1rem + .5vw,1.35rem);line-height:1.55}
+.fest__actions{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;margin-top:.4rem}
+.fest .btn{min-height:50px;padding-inline:1.8rem}
+.fest .btn--caramel:hover{background:var(--cream)}
+.fest .btn--ghost{color:var(--ivory);border-color:var(--cream)}
+.fest .btn--ghost:hover{background:var(--cream);color:var(--choc-900)}
+.fest :focus-visible{outline-color:var(--cream);box-shadow:0 0 0 6px var(--choc-900)}
+
+/* row of lit diyas */
+.fest__diyas{display:flex;gap:clamp(1rem,3vw,2.2rem);align-items:flex-end;margin:clamp(.8rem,2vw,1.6rem) 0 0;padding:0;list-style:none}
+.fest__diyas li{position:relative;width:clamp(34px,5vw,58px)}
+.fest__diyas svg{display:block;width:100%;height:auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+.flame{position:absolute;left:50%;bottom:62%;width:34%;aspect-ratio:3/5;translate:-50% 0;border-radius:50% 50% 50% 50%/68% 68% 32% 32%;background:linear-gradient(0deg,#C9916D 0%,#E1B797 45%,#FBF6F0 100%);box-shadow:0 0 14px 4px rgba(225,183,151,.7),0 0 36px 12px rgba(201,145,109,.35);transform-origin:50% 100%;animation:dw-flick 1s ease-in-out var(--fd,0s) infinite alternate}
+
+/* scalloped edge back into the ivory page */
+.fest__edge{position:absolute;left:0;right:0;bottom:-1px;height:30px;z-index:6;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30' viewBox='0 0 60 30'%3E%3Cpath d='M0 30C0 14 14 4 30 4s30 10 30 26z' fill='%23FBF6F0'/%3E%3Cpath d='M6 30C6 18 17 10 30 10s24 8 24 20' fill='none' stroke='%23C9916D' stroke-opacity='.55' stroke-width='1.2'/%3E%3C/svg%3E") 0 100%/60px 30px repeat-x}
+
+/* ---------- the rest of the page picks up the theme ---------- */
+.sec-head h2::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:.45em;vertical-align:-.04em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2c3.4 4.2 4.4 7.6 0 11.6C11.6 9.6 12.6 6.2 16 2z' fill='%23C9916D'/%3E%3Cpath d='M3 17h26c0 6-5 10-13 10S3 23 3 17z' fill='%23542E1D'/%3E%3Cpath d='M7 17h18' stroke='%23FBF6F0' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat}
+.sec-head{border-bottom-color:rgba(201,145,109,.55)}
+.story{position:relative}
+.story::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='12' viewBox='0 0 28 12'%3E%3Cpath d='M14 1l5 5-5 5-5-5z' fill='%23C9916D'/%3E%3Ccircle cx='0' cy='6' r='1.6' fill='%23E1B797'/%3E%3Ccircle cx='28' cy='6' r='1.6' fill='%23E1B797'/%3E%3C/svg%3E") center/28px 12px repeat-x;opacity:.9}
+.story{background:radial-gradient(ellipse 60% 90% at 85% 0,rgba(201,145,109,.22),transparent 70%),var(--choc-900)}
+.trust{border-top:2px solid var(--caramel)}
+@media (hover:hover){.pcard:hover,.cat:hover{box-shadow:0 0 0 1px var(--caramel),0 14px 34px -12px rgba(201,145,109,.55)}}
+
+/* ---------- device tuning ---------- */
+@media (max-width:700px){
+  .fest{min-height:clamp(540px,calc(100svh - var(--header-h)),760px)}
+  .fest__toran{height:56px;background-size:72px 56px}
+  .lan--4,.lan--5{display:none}
+  .fest__bokeh li:nth-child(n+8){display:none}
+  .fest__rangoli{width:170vw}
+  .fest__actions .btn{flex:1 1 100%}
+}
+@media (min-width:1100px){
+  .fest__title{letter-spacing:.015em}
+  .fest__diyas{gap:2.6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .fest__rangoli,.lan,.lan::after,.flame,.fest__title em,.fest__bokeh li{animation:none}
+  .fest__bokeh li{opacity:calc(var(--o)*.5);bottom:auto;top:calc(var(--x)*.8)}
+  .fest__inner>*{animation:none}
+  .fest__layer{transition:none;translate:none}
+  .fest__fx{display:none}
+}
