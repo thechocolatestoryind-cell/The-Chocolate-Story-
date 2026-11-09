@@ -206,8 +206,7 @@ input[readonly]{background:var(--blush);color:var(--text-soft)}
 
 /* ==========================================================================
    Chocolate theme layer (appended; nothing above this line was changed)
-   Assets: choco-gloss.jpg, choco-drip.png, choco-drip-header.png, choco-splash.webp,
-           choco-doodle-top.jpg, choco-doodle-footer.jpg, choco-doodle-footer-wide.jpg
+   Assets: choco-gloss.jpg, choco-drip.png, choco-splash.webp
    ========================================================================== */
 
 /* page background: warm cream with soft cocoa glows (no grid, no grain) */
@@ -229,46 +228,18 @@ body{
   }
 }
 
-/* header: chocolate glaze dripping from the bottom edge */
+/* header */
 .site-header{background:rgba(251,241,230,.94)}
-.site-header::after{
-  content:"";position:absolute;left:0;right:0;top:100%;height:34px;pointer-events:none;
-  background:linear-gradient(180deg,#3a2116,#5a321f);
-  -webkit-mask:url("choco-drip-header.png") repeat-x left top/auto 100%;
-  mask:url("choco-drip-header.png") repeat-x left top/auto 100%;
-}
-@media (min-width:900px){.site-header::after{height:42px}}
 
 /* announcement bar */
 .announce{background:linear-gradient(180deg,#3a2217,var(--choc-900))}
 
-/* page heads (shop, cart, account...): illustrated curls + torn edge on the right */
-.page-head{position:relative;overflow:hidden}
-.page-head::before{
-  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:url("choco-doodle-top.jpg") right top/auto 100% no-repeat;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0%,transparent 30%,#000 75%);
-  mask-image:linear-gradient(90deg,transparent 0%,transparent 30%,#000 75%);
-  opacity:.9;
-}
-.page-head>*{position:relative;z-index:1}
-
-/* footer: illustrated splash + chocolate bars band, then glossy melted chocolate */
+/* footer: glossy melted chocolate */
 .site-footer{
   background:
     linear-gradient(180deg,rgba(35,18,10,.42) 0%,rgba(35,18,10,.78) 55%,rgba(35,18,10,.9) 100%),
     url("choco-gloss.jpg") center top/cover no-repeat,
     var(--choc-900);
-}
-.site-footer::before{
-  content:"";display:block;width:100%;aspect-ratio:736/608;max-height:420px;
-  background:#FFF3E3 url("choco-doodle-footer.jpg") center bottom/cover no-repeat;
-}
-@media (min-width:700px){
-  .site-footer::before{
-    aspect-ratio:auto;height:360px;max-height:none;
-    background:#FFF3E3 url("choco-doodle-footer-wide.jpg") center bottom/auto 100% no-repeat;
-  }
 }
 
 /* homepage brand-story band (index.html only): glossy chocolate + real drips into the next section */
