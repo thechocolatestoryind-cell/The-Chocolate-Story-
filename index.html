@@ -30,11 +30,14 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap">
+<script>try{if(!sessionStorage.getItem("tcs-splash")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("has-splash")}catch(e){}</script>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="home.css">
 <link rel="stylesheet" href="responsive.css">
 </head>
 <body data-page="home">
+<div class="splash" id="splash" aria-hidden="true"><div class="splash__stage"><div class="splash__bar"></div><div class="splash__wrap"><img src="logo-header.webp" alt="" width="1380" height="719"></div><div class="splash__flap"></div></div></div>
+<script>(function(){var h=document.documentElement,s=document.getElementById("splash");if(!s)return;if(!h.classList.contains("has-splash")){s.remove();return}try{sessionStorage.setItem("tcs-splash","1")}catch(e){}var d=false;function end(){if(d)return;d=true;s.classList.add("is-leaving");setTimeout(function(){h.classList.remove("has-splash");s.remove()},700)}setTimeout(end,1600);s.addEventListener("click",end)})();</script>
 <div id="site-header"></div>
 <main id="main">
   <div id="hero-slot">
