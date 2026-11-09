@@ -203,3 +203,77 @@ input[readonly]{background:var(--blush);color:var(--text-soft)}
   .site-footer .site-footer__grid{grid-template-columns:1.5fr 1fr 1fr 1.15fr 1.4fr}
   .site-footer .site-footer__brand,.site-footer .site-footer__contact{grid-column:auto}
 }
+
+/* ==========================================================================
+   Chocolate theme layer (appended; nothing above this line was changed)
+   Assets: grain.png, choco-gloss.jpg, choco-drip.png, choco-splash.webp
+   ========================================================================== */
+
+/* page background: warm cream + cocoa glows + faint ruled grid + fine grain */
+body{
+  background-color:#FBF1E6;
+  background-image:
+    url("grain.png"),
+    linear-gradient(rgba(157,111,81,.075) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(157,111,81,.075) 1px,transparent 1px),
+    radial-gradient(900px 520px at 100% 0%,rgba(201,145,109,.24),transparent 62%),
+    radial-gradient(760px 520px at 0% 45%,rgba(157,111,81,.12),transparent 62%),
+    radial-gradient(900px 560px at 100% 100%,rgba(84,46,29,.16),transparent 65%);
+  background-size:240px 240px,30px 30px,30px 30px,auto,auto,auto;
+  background-repeat:repeat,repeat,repeat,no-repeat,no-repeat,no-repeat;
+}
+
+/* real melted-chocolate splash on the right edge, wide screens only (sits in the side margin) */
+@media (min-width:1360px){
+  body::before{
+    content:"";position:fixed;z-index:-1;top:0;right:0;bottom:0;width:clamp(150px,13vw,240px);
+    background:url("choco-splash.webp") right top/100% auto no-repeat;
+    pointer-events:none;opacity:.95;
+  }
+}
+
+/* page heads (shop, cart, account...) get a soft cocoa wash instead of a flat strip */
+.page-head{
+  background:
+    url("grain.png"),
+    radial-gradient(700px 240px at 100% 0%,rgba(201,145,109,.35),transparent 70%),
+    linear-gradient(180deg,var(--blush),rgba(251,241,230,0));
+  background-size:240px 240px,auto,auto;
+}
+
+/* announcement bar */
+.announce{background:linear-gradient(180deg,#3a2217,var(--choc-900))}
+
+/* header: slightly warmer glass */
+.site-header{background:rgba(251,241,230,.92)}
+
+/* footer: glossy melted chocolate */
+.site-footer{
+  background:
+    linear-gradient(180deg,rgba(35,18,10,.42) 0%,rgba(35,18,10,.78) 55%,rgba(35,18,10,.9) 100%),
+    url("choco-gloss.jpg") center top/cover no-repeat,
+    var(--choc-900);
+}
+
+/* homepage brand-story band (index.html only): glossy chocolate + real drips into the next section */
+body .story{
+  position:relative;
+  margin-bottom:64px;
+  background:
+    linear-gradient(180deg,rgba(35,18,10,.55),rgba(35,18,10,.35)),
+    url("choco-gloss.jpg") center 88%/cover no-repeat,
+    var(--choc-900);
+}
+body .story::after{
+  content:"";position:absolute;left:0;right:0;top:calc(100% - 2px);height:84px;pointer-events:none;
+  background:linear-gradient(180deg,#2a170e,#4a2818);
+  -webkit-mask:url("choco-drip.png") repeat-x left top/auto 100%;
+  mask:url("choco-drip.png") repeat-x left top/auto 100%;
+}
+@media (min-width:600px){
+  body .story{margin-bottom:84px}
+  body .story::after{height:110px}
+}
+
+/* cards sit on the textured page like paper */
+.panel,.state{background:rgba(255,253,249,.92)}
