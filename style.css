@@ -203,3 +203,38 @@ input[readonly]{background:var(--blush);color:var(--text-soft)}
   .site-footer .site-footer__grid{grid-template-columns:1.5fr 1fr 1fr 1.15fr 1.4fr}
   .site-footer .site-footer__brand,.site-footer .site-footer__contact{grid-column:auto}
 }
+
+/* ---- chocolate theme: textured background, drips and wavy edges (visual-only, no layout/logic changes) ---- */
+:root{
+  --cocoa-paper:#FCF2E2; --cocoa-grid:rgba(157,111,81,.11);
+  --drip:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='38' viewBox='0 0 120 38'%3E%3Cpath fill='%23542E1D' d='M0 0H120V12H104q-4 0-4 4v10a4 4 0 0 1-8 0V16q0-4-4-4H70q-4 0-4 4v2a4 4 0 0 1-8 0v-2q0-4-4-4H28q-4 0-4 4v18a4 4 0 0 1-8 0V16q0-4-4-4H0Z'/%3E%3Cpath fill='none' stroke='%23C9916D' stroke-opacity='.55' stroke-width='1.6' stroke-linecap='round' d='M17.5 20v11M93.5 19v5M59.5 15v1'/%3E%3C/svg%3E");
+  --wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='26' viewBox='0 0 160 26' preserveAspectRatio='none'%3E%3Cpath fill='%232D1910' d='M0 26V13C20 1 40 1 80 13S140 25 160 13V26Z'/%3E%3C/svg%3E");
+  --splash-a:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 420'%3E%3Cg fill='%2370443A' fill-opacity='.16'%3E%3Cpath d='M0 420V215C45 200 80 160 70 118c-2-10 10-14 20-2 22 28 28 66 72 100 46 36 104 36 160 70 36 22 62 58 78 134Z'/%3E%3Ccircle cx='104' cy='88' r='9'/%3E%3Ccircle cx='238' cy='214' r='7'/%3E%3Ccircle cx='320' cy='272' r='5'/%3E%3Cpath d='M150 160c14-10 40-6 46 12 4 14-8 24-22 24-22 0-34-22-24-36Z'/%3E%3C/g%3E%3Cpath d='M0 330c60-40 140-20 150 24 8 36-40 52-62 26-18-22 6-52 40-44' fill='none' stroke='%2370443A' stroke-opacity='.2' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+  --splash-b:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 420'%3E%3Cg fill='%2370443A' fill-opacity='.14'%3E%3Cpath d='M600 0V190c-48 14-86 56-78 100 2 10-10 14-20 2-20-26-30-60-70-94-40-34-96-34-150-70C246 106 222 62 206 0Z'/%3E%3Ccircle cx='500' cy='320' r='9'/%3E%3Ccircle cx='372' cy='194' r='7'/%3E%3Ccircle cx='296' cy='138' r='5'/%3E%3C/g%3E%3Cpath d='M600 90c-60 40-140 20-150-24-8-36 40-52 62-26 18 22-6 52-40 44' fill='none' stroke='%2370443A' stroke-opacity='.2' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+body{
+  background-color:var(--cocoa-paper);
+  background-image:
+    linear-gradient(var(--cocoa-grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--cocoa-grid) 1px,transparent 1px);
+  background-size:30px 30px;
+}
+/* wavy chocolate splashes in the page corners, behind all content */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:var(--splash-a),var(--splash-b);
+  background-repeat:no-repeat,no-repeat;
+  background-position:left bottom,right top;
+  background-size:min(78vw,520px) auto,min(78vw,520px) auto;
+}
+/* header: soft cream so the grid paper shows through a little */
+.site-header{background:rgba(252,242,226,.92)}
+/* page heads get a melted-chocolate drip edge */
+.page-head{position:relative;border-bottom:0;margin-bottom:34px;background:linear-gradient(180deg,rgba(243,228,214,.92),rgba(243,228,214,0))}
+.page-head::after{content:"";position:absolute;left:0;right:0;top:100%;height:38px;background:var(--drip) repeat-x top left/120px 38px;pointer-events:none;z-index:1}
+/* footer: wavy melted-chocolate top edge */
+.site-footer{position:relative}
+.site-footer::before{content:"";position:absolute;left:0;right:0;bottom:calc(100% - 1px);height:26px;background:var(--wave) repeat-x bottom left/160px 26px;pointer-events:none}
+/* panels & cards: warm cocoa border to match the theme */
+.panel,.state{border-color:#D9BFA8;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 8px 22px -14px rgba(84,46,29,.35)}
+@media (prefers-reduced-motion:reduce){body::before{display:none}}
