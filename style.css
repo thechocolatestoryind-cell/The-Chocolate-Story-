@@ -204,37 +204,21 @@ input[readonly]{background:var(--blush);color:var(--text-soft)}
   .site-footer .site-footer__brand,.site-footer .site-footer__contact{grid-column:auto}
 }
 
-/* ---- chocolate theme: textured background, drips and wavy edges (visual-only, no layout/logic changes) ---- */
-:root{
-  --cocoa-paper:#FCF2E2; --cocoa-grid:rgba(157,111,81,.11);
-  --drip:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='38' viewBox='0 0 120 38'%3E%3Cpath fill='%23542E1D' d='M0 0H120V12H104q-4 0-4 4v10a4 4 0 0 1-8 0V16q0-4-4-4H70q-4 0-4 4v2a4 4 0 0 1-8 0v-2q0-4-4-4H28q-4 0-4 4v18a4 4 0 0 1-8 0V16q0-4-4-4H0Z'/%3E%3Cpath fill='none' stroke='%23C9916D' stroke-opacity='.55' stroke-width='1.6' stroke-linecap='round' d='M17.5 20v11M93.5 19v5M59.5 15v1'/%3E%3C/svg%3E");
-  --wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='26' viewBox='0 0 160 26' preserveAspectRatio='none'%3E%3Cpath fill='%232D1910' d='M0 26V13C20 1 40 1 80 13S140 25 160 13V26Z'/%3E%3C/svg%3E");
-  --splash-a:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 420'%3E%3Cg fill='%2370443A' fill-opacity='.16'%3E%3Cpath d='M0 420V215C45 200 80 160 70 118c-2-10 10-14 20-2 22 28 28 66 72 100 46 36 104 36 160 70 36 22 62 58 78 134Z'/%3E%3Ccircle cx='104' cy='88' r='9'/%3E%3Ccircle cx='238' cy='214' r='7'/%3E%3Ccircle cx='320' cy='272' r='5'/%3E%3Cpath d='M150 160c14-10 40-6 46 12 4 14-8 24-22 24-22 0-34-22-24-36Z'/%3E%3C/g%3E%3Cpath d='M0 330c60-40 140-20 150 24 8 36-40 52-62 26-18-22 6-52 40-44' fill='none' stroke='%2370443A' stroke-opacity='.2' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
-  --splash-b:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 420'%3E%3Cg fill='%2370443A' fill-opacity='.14'%3E%3Cpath d='M600 0V190c-48 14-86 56-78 100 2 10-10 14-20 2-20-26-30-60-70-94-40-34-96-34-150-70C246 106 222 62 206 0Z'/%3E%3Ccircle cx='500' cy='320' r='9'/%3E%3Ccircle cx='372' cy='194' r='7'/%3E%3Ccircle cx='296' cy='138' r='5'/%3E%3C/g%3E%3Cpath d='M600 90c-60 40-140 20-150-24-8-36 40-52 62-26 18 22-6 52-40 44' fill='none' stroke='%2370443A' stroke-opacity='.2' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
-}
-body{
-  background-color:var(--cocoa-paper);
-  background-image:
-    linear-gradient(var(--cocoa-grid) 1px,transparent 1px),
-    linear-gradient(90deg,var(--cocoa-grid) 1px,transparent 1px);
-  background-size:30px 30px;
-}
-/* wavy chocolate splashes in the page corners, behind all content */
-body::before{
-  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background-image:var(--splash-a),var(--splash-b);
-  background-repeat:no-repeat,no-repeat;
-  background-position:left bottom,right top;
-  background-size:min(78vw,520px) auto,min(78vw,520px) auto;
-}
-/* header: soft cream so the grid paper shows through a little */
-.site-header{background:rgba(252,242,226,.92)}
-/* page heads get a melted-chocolate drip edge */
-.page-head{position:relative;border-bottom:0;margin-bottom:34px;background:linear-gradient(180deg,rgba(243,228,214,.92),rgba(243,228,214,0))}
-.page-head::after{content:"";position:absolute;left:0;right:0;top:100%;height:38px;background:var(--drip) repeat-x top left/120px 38px;pointer-events:none;z-index:1}
-/* footer: wavy melted-chocolate top edge */
-.site-footer{position:relative}
-.site-footer::before{content:"";position:absolute;left:0;right:0;bottom:calc(100% - 1px);height:26px;background:var(--wave) repeat-x bottom left/160px 26px;pointer-events:none}
-/* panels & cards: warm cocoa border to match the theme */
-.panel,.state{border-color:#D9BFA8;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 8px 22px -14px rgba(84,46,29,.35)}
-@media (prefers-reduced-motion:reduce){body::before{display:none}}
+
+/* ===== Brand visual layer: chocolate & cake identity ===== */
+body{background:radial-gradient(900px 520px at 100% 0,rgba(225,183,151,.30),transparent 62%),radial-gradient(760px 480px at 0 100%,rgba(201,145,109,.16),transparent 62%),var(--ivory)}
+.page-head{position:relative;overflow:hidden;padding-top:clamp(3.25rem,6vw,4.75rem);background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20340%2030%27%3E%3Cg%20fill%3D%27%23542E1D%27%3E%3Crect%20width%3D%27340%27%20height%3D%279%27/%3E%3Crect%20x%3D%2718%27%20width%3D%279%27%20height%3D%2720%27%20rx%3D%274.5%27/%3E%3Crect%20x%3D%2764%27%20width%3D%277%27%20height%3D%2711%27%20rx%3D%273.5%27/%3E%3Crect%20x%3D%27104%27%20width%3D%2710%27%20height%3D%2728%27%20rx%3D%275.0%27/%3E%3Crect%20x%3D%27158%27%20width%3D%278%27%20height%3D%2715%27%20rx%3D%274.0%27/%3E%3Crect%20x%3D%27206%27%20width%3D%277%27%20height%3D%2710%27%20rx%3D%273.5%27/%3E%3Crect%20x%3D%27246%27%20width%3D%2711%27%20height%3D%2724%27%20rx%3D%275.5%27/%3E%3Crect%20x%3D%27300%27%20width%3D%278%27%20height%3D%2717%27%20rx%3D%274.0%27/%3E%3C/g%3E%3Cg%20fill%3D%27%2523fff%27%20fill-opacity%3D%27.2%27%3E%3Crect%20x%3D%2720.5%27%20y%3D%276%27%20width%3D%271.8%27%20height%3D%278%27%20rx%3D%27.9%27/%3E%3Crect%20x%3D%27106.8%27%20y%3D%276%27%20width%3D%271.8%27%20height%3D%2716%27%20rx%3D%27.9%27/%3E%3Crect%20x%3D%27160.2%27%20y%3D%276%27%20width%3D%271.8%27%20height%3D%273%27%20rx%3D%27.9%27/%3E%3Crect%20x%3D%27249.1%27%20y%3D%276%27%20width%3D%271.8%27%20height%3D%2712%27%20rx%3D%27.9%27/%3E%3Crect%20x%3D%27302.2%27%20y%3D%276%27%20width%3D%271.8%27%20height%3D%275%27%20rx%3D%27.9%27/%3E%3C/g%3E%3C/svg%3E") repeat-x 0 0/340px 30px,linear-gradient(180deg,var(--blush),var(--ivory))}
+.page-head>.container{position:relative;z-index:1}
+@media (min-width:900px){.page-head::after{content:"";position:absolute;top:0;right:0;bottom:0;width:clamp(140px,14vw,220px);background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20160%20240%27%3E%3Cpath%20fill%3D%27%235B3220%27%20d%3D%27M160%200V240H112C118%20228%20130%20224%20132%20214C134%20204%20120%20198%20126%20188L54%20186C48%20186%2048%20181%2054%20181L128%20180C134%20168%20122%20160%20128%20150C134%20140%20124%20132%20126%20122L88%20120C82%20120%2082%20115%2088%20115L128%20114C134%20100%20118%2092%20126%2080C132%2068%20122%2062%20124%2050L72%2048C66%2048%2066%2043%2072%2043L126%2042C132%2030%20122%2018%20128%200Z%27/%3E%3Ccircle%20cx%3D%2751%27%20cy%3D%27183.5%27%20r%3D%273.6%27%20fill%3D%27%235B3220%27/%3E%3Ccircle%20cx%3D%2785%27%20cy%3D%27117.5%27%20r%3D%273.2%27%20fill%3D%27%235B3220%27/%3E%3Ccircle%20cx%3D%2769%27%20cy%3D%2745.5%27%20r%3D%273.6%27%20fill%3D%27%235B3220%27/%3E%3Cpath%20d%3D%27M142%2018C148%2060%20136%2092%20144%20132%27%20fill%3D%27none%27%20stroke%3D%27%2523fff%27%20stroke-opacity%3D%27.2%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E") no-repeat right center/auto 100%;pointer-events:none}}
+body :is(.panel,.order-card,.summary-card,.addr,.addr-card,.rev--full){background-image:linear-gradient(180deg,rgba(243,228,214,0),rgba(243,228,214,.6))}
+
+/* ===== Branded loading state (used by renderLoading on Orders and other pages) ===== */
+.state--loading{border:0;background:none;grid-template-columns:minmax(0,680px);justify-content:center;gap:.6rem;padding:clamp(1rem,3vw,2rem) 0}
+.state--loading .spinner{order:1;width:22px;height:22px;margin-bottom:.8rem;border:0;border-radius:0 50% 50% 50%;background:linear-gradient(135deg,#7a4630,var(--choc-700));transform:rotate(-45deg);animation:choc-drop 1.3s var(--ease) infinite}
+.state--loading p{order:2;margin:0 0 .4rem;font:600 var(--fs-1)/1.2 var(--font-display);color:var(--choc-700)}
+.state--loading::before,.state--loading::after{content:"";width:100%;height:104px;border:1px solid var(--line);border-radius:var(--radius);background-color:var(--paper);background-image:linear-gradient(100deg,transparent 30%,rgba(243,228,214,.9) 50%,transparent 70%),linear-gradient(#EBD6C3,#EBD6C3),linear-gradient(#EBD6C3,#EBD6C3),linear-gradient(#EBD6C3,#EBD6C3);background-size:200% 100%,45% 16px,70% 12px,30% 12px;background-position:0 0,16px 18px,16px 50px,16px 76px;background-repeat:repeat-x,no-repeat,no-repeat,no-repeat;animation:choc-shimmer 1.4s linear infinite}
+.state--loading::before{order:3}
+.state--loading::after{order:4;opacity:.65}
+@keyframes choc-shimmer{to{background-position:-200% 0,16px 18px,16px 50px,16px 76px}}
+@keyframes choc-drop{0%{transform:translateY(-8px) rotate(-45deg) scale(.7);opacity:0}40%{transform:translateY(0) rotate(-45deg);opacity:1}80%{transform:translateY(10px) rotate(-45deg);opacity:1}100%{transform:translateY(14px) rotate(-45deg) scale(.9);opacity:0}}
+@media (prefers-reduced-motion:reduce){.state--loading .spinner,.state--loading::before,.state--loading::after{animation:none}}
